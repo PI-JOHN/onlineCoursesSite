@@ -70,6 +70,8 @@ class CourseController
 
       if(!User::checkPassword($password)){
         $errors[] = 'Пароль должен быть не короче 6-ти символов';
+      } else {
+        $password=password_hash($password, PASSWORD_DEFAULT);
       }
 
       if ($errors == false){

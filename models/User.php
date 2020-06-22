@@ -3,21 +3,49 @@
 
 class User
 {
-    public static function checkUser($email, $password)
-    {
-        $db = Db::getConnection();
-        $sql = 'SELECT * FROM users WHERE email=:email AND password=:password';
-        $result = $db->prepare($sql);
-        $result->bindParam(':email', $email, PDO::PARAM_STR);
-        $result->bindParam(':password', $password, PDO::PARAM_STR);
-        $result->execute();
-        $user = $result->fetch();
-        //var_dump($user); die;
-        if ($user){
-            return $user['id'];
+
+        public static function checkUser($email, $password)
+        {
+            $db = Db::getConnection();
+            $sql = 'SELECT email, password FROM users ORDER BY id ASC';
+            $result = $db->query($sql);
+            $userList = $result->setFetchMode(PDO::FETCH_KEY_PAIR);
+            $userList = $result->fetchAll();
+//            echo '<pre>';
+//            var_dump($userList);
+//            echo '</pre>';
+            if(password_verify($password, $userList[$email])){
+                  $db = Db::getConnection();
+                  $sql = 'SELECT * FROM users WHERE email = :email';
+                  $result = $db->prepare($sql);
+                  $result->bindParam(':email', $email, PDO::PARAM_STR);
+                  $result->execute();
+                  $user = $result->fetch();
+                  if($user){
+                      return $user['id'];
+                  } return false;
+            }
         }
-        return false;
-    }
+
+
+//    public static function checkUser($email, $password)
+//    {
+//        $db = Db::getConnection();
+//
+//        $sql = 'SELECT * FROM users WHERE email=:email AND password=:password';
+//        $result = $db->prepare($sql);
+//        $result->bindParam(':email', $email, PDO::PARAM_STR);
+//        $result->bindParam(':password', $password, PDO::PARAM_STR);
+//        $result->execute();
+//        $user = $result->fetch();
+//
+//        //var_dump($user); die;
+//        if ($user){
+//            return $user['id'];
+//        }
+//        return false;
+//
+//    }
 
     public static function auth($userId)
     {
