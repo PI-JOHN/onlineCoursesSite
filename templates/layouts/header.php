@@ -16,5 +16,9 @@
         <a class="p-2 text-dark" href="/about/">Контакты</a>
 
       </nav>
-      <a class="btn btn-outline-primary" href="#">Войти</a>
+        <?php if (isset($_SESSION['user'])): ?>
+        <a class="btn btn-outline-primary" href="/cabinet/">Личный Кабинет</a>
+        <?php else: ?>
+      <a class="btn btn-outline-primary" href="/auth/">Войти</a>
+        <?php endif; ?>
     </div>

@@ -5,6 +5,8 @@
     <?php foreach ($errors as $error): ?>
     <p><?php echo $error; ?></p>
     <?php endforeach; ?>
+    <?php else: ?><br>
+    <h4>Сообщение отправлено! Мы ответим вам на указанынй Email!</h4>
     <?php endif; ?>
       <form class="" action="#" method="post">
         <input class="form-control" type="email" name="email" value="" placeholder="Email"><br>

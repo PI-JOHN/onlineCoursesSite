@@ -21,5 +21,16 @@ class Course
 
     return $courses;
   }
+
+  public static function getCourseById($id)
+  {
+    $db = Db::getConnection();
+    $sql = 'SELECT * FROM courses WHERE id = :id';
+    $result = $db->prepare($sql);
+    $result->bindParam(':id', $id, PDO::PARAM_INT);
+    $result->setFetchMode(PDO::FETCH_ASSOC);
+    $result->execute();
+    return $result->fetch();
+  }
 }
  ?>
