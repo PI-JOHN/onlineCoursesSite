@@ -21,7 +21,7 @@
               <li><a href="https://itproger.com/courses/web">itProger</a> </li>
 
             </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary"><a href="/view/<?php echo $course['id']; ?>">Подробнее</a></button>
+              <a href="/view/<?php echo $course['id']; ?>"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Подробнее</button></a>
           </div>
         </div>
 
